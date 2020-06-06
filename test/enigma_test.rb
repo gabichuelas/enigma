@@ -21,6 +21,7 @@ class EnigmaTest < Minitest::Test
       d: 20
     }
     assert_equal shifts, @enigma.shifts("02715", "040895")
+    assert_equal 27, @enigma.shifts("02715", "040895")[:b]
   end
 
   def test_can_encrypt
