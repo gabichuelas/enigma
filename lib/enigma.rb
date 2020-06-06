@@ -1,9 +1,7 @@
-require 'date'
-require_relative 'key'
-require_relative 'encryptable'
+# require 'date'
+# require_relative 'key'
 
 class Enigma
-  include Encryptable
   KEY = Key.make
   DATE = Date.today.strftime("%d%m%y")
 
@@ -21,6 +19,11 @@ class Enigma
     c = key[2..3].to_i + last_four[2].to_i
     d = key[3..4].to_i + last_four[3].to_i
     { a: a, b: b, c: c, d: d }
+  end
+
+  def prepare(message)
+    split_chars = message.chars
+    split_chars.each_slice(4)
   end
 
 end
