@@ -15,7 +15,7 @@ class Enigma
         encrypted << new_char(char[2], shift[:c]) if char[2]
         encrypted << new_char(char[3], shift[:d]) if char[3]
     end
-    encrypted.join
+
     {
       encryption: encrypted.join,
       key: key,
