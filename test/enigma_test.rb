@@ -2,6 +2,7 @@ require "minitest/autorun"
 require "minitest/pride"
 require "date"
 require "./lib/enigma"
+require "./lib/key"
 
 class EnigmaTest < Minitest::Test
   def setup
