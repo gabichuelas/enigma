@@ -9,16 +9,18 @@ class Enigma
   def encrypt(message, key = KEY, date = DATE)
     shift = create_shifts(key, date)
     encrypted = []
-    prepare(message).map do |char|
-      encrypted <<
-      (new_char(char[0], shift[:a]) +
-      new_char(char[1], shift[:b]) +
-      new_char(char[2], shift[:c]) +
-      new_char(char[3], shift[:d]))
+    prepare(message).each do |char|
+        encrypted << new_char(char[0], shift[:a])
+        encrypted << new_char(char[1], shift[:b]) if char[1]
+        encrypted << new_char(char[2], shift[:c]) if char[2]
+        encrypted << new_char(char[3], shift[:d]) if char[3]
     end
-    require "pry"; binding.pry
-    # encryption method
-    # returns Hash with encrypted message, key, and date
+    encrypted.join
+    {
+      encryption: encrypted.join,
+      key: key,
+      date: date
+    }
   end
 
   def create_shifts(key, date)
@@ -36,8 +38,12 @@ class Enigma
   end
 
   def new_char(char, shift)
-    new_index = (ALPHA.index(char) + shift) % ALPHA.count
-    ALPHA[new_index]
+    if ALPHA.include?(char)
+      new_index = (ALPHA.index(char) + shift) % ALPHA.count
+      ALPHA[new_index]
+    else
+      char
+    end
   end
 
 end
