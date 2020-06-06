@@ -35,14 +35,20 @@ class EnigmaTest < Minitest::Test
   end
 
   def test_can_encrypt
-    skip
     expected = {
-      encryption: "keder ohulw",
+      encryption: "keder ohulw!",
       key: "02715",
       date: "040895"
     }
 
-    assert_equal expected, @enigma.encrypt("hello world", "02715", "040895")
+    assert_equal expected, @enigma.encrypt("hello world!", "02715", "040895")
+  end
+
+  def test_can_encrypt_using_generated_date
+    @enigma.stubs(:today).returns("060620")
+    encrypted = @enigma.encrypt("hello world", "02715")
+    assert_equal "02715", encrypted[:key]
+    assert_equal "060620", encrypted[:date]
   end
 
   def test_can_decrypt
@@ -54,14 +60,6 @@ class EnigmaTest < Minitest::Test
     }
 
     assert_equal expected, @enigma.decrypt("keder ohulw", "02715", "040895")
-  end
-
-  def test_can_encrypt_using_generated_date
-    skip
-    encrypted = {
-
-    }
-    assert_equal encrypted, @enigma.encrypt("hello world", "02715")
   end
 
   def test_can_decrypt_using_generated_date

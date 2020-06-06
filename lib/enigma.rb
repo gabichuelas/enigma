@@ -7,8 +7,16 @@ class Enigma
   ALPHA = ("a".."z").to_a << " "
 
   def encrypt(message, key = KEY, date = DATE)
-    prepare(message)
     shift = create_shifts(key, date)
+    encrypted = []
+    prepare(message).map do |char|
+      encrypted <<
+      (new_char(char[0], shift[:a]) +
+      new_char(char[1], shift[:b]) +
+      new_char(char[2], shift[:c]) +
+      new_char(char[3], shift[:d]))
+    end
+    require "pry"; binding.pry
     # encryption method
     # returns Hash with encrypted message, key, and date
   end
@@ -28,7 +36,6 @@ class Enigma
   end
 
   def new_char(char, shift)
-    # require "pry"; binding.pry
     new_index = (ALPHA.index(char) + shift) % ALPHA.count
     ALPHA[new_index]
   end
