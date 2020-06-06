@@ -1,7 +1,10 @@
+# require_relative 'key'
+# require 'date'
+
 class Enigma
-  
-@@key = Key.new
-@@date = Date.today.strftime(%d%m%y)
+
+@@key = Key.make
+@@date = Date.today.strftime("%d%m%y")
 
   def encrypt(message, key = @@key, date = @@date)
     # helper that prepares message
