@@ -22,6 +22,13 @@ class EnigmaTest < Minitest::Test
     assert_equal 27, @enigma.shifts("02715", "040895")[:b]
   end
 
+  def test_can_prepare_message_for_encryption
+    enum = @enigma.prepare("hello world")
+    assert_equal true, enum.include?(["h","e","l","l"])
+    assert_equal true, enum.include?(["o"," ","w","o"])
+    assert_equal true, enum.include?(["r","l","d"])
+  end
+
   def test_can_encrypt
     skip
     expected = {

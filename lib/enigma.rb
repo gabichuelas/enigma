@@ -1,5 +1,5 @@
-# require 'date'
-# require_relative 'key'
+require 'date'
+require_relative 'key'
 
 class Enigma
   KEY = Key.make
