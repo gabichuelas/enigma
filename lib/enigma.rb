@@ -7,6 +7,15 @@ class Enigma
   ALPHA = ("a".."z").to_a << " "
 
   def encrypt(message, key = KEY, date = DATE)
+    encrypted = shift_chars(message, key, date)
+    {
+      encryption: encrypted.join,
+      key: key,
+      date: date
+    }
+  end
+
+  def shift_chars(message, key, date)
     shift = create_shifts(key, date)
     encrypted = []
     prepare(message).each do |char|
@@ -15,12 +24,7 @@ class Enigma
         encrypted << new_char(char[2], shift[:c]) if char[2]
         encrypted << new_char(char[3], shift[:d]) if char[3]
     end
-
-    {
-      encryption: encrypted.join,
-      key: key,
-      date: date
-    }
+    encrypted
   end
 
   def create_shifts(key, date)
