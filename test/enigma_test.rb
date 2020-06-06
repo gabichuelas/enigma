@@ -13,7 +13,18 @@ class EnigmaTest < Minitest::Test
     assert_instance_of Enigma, @enigma
   end
 
+  def test_create_shifts
+    shifts = {
+      a: 3,
+      b: 27,
+      c: 73,
+      d: 20
+    }
+    assert_equal shifts, @enigma.shifts("02715", "040895")
+  end
+
   def test_can_encrypt
+    skip
     expected = {
       encryption: "keder ohulw",
       key: "02715",
