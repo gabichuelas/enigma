@@ -29,6 +29,11 @@ class EnigmaTest < Minitest::Test
     assert_equal true, enum.include?(["r","l","d"])
   end
 
+  def test_can_encrypt_one_char_at_a_time
+    assert_equal "k", @enigma.new_char("h", 3)
+    assert_equal "d", @enigma.new_char("l", 73)
+  end
+
   def test_can_encrypt
     skip
     expected = {
