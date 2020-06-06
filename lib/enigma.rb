@@ -17,14 +17,13 @@ class Enigma
 
   def shift_chars(message, key, date)
     shift = create_shifts(key, date)
-    encrypted = []
-    prepare(message).each do |char|
-        encrypted << new_char(char[0], shift[:a])
-        encrypted << new_char(char[1], shift[:b]) if char[1]
-        encrypted << new_char(char[2], shift[:c]) if char[2]
-        encrypted << new_char(char[3], shift[:d]) if char[3]
+    prepare(message).reduce([]) do |acc, char|
+        acc << new_char(char[0], shift[:a])
+        acc << new_char(char[1], shift[:b]) if char[1]
+        acc << new_char(char[2], shift[:c]) if char[2]
+        acc << new_char(char[3], shift[:d]) if char[3]
+        acc
     end
-    encrypted
   end
 
   def create_shifts(key, date)
