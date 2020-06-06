@@ -18,8 +18,8 @@ class EnigmaTest < Minitest::Test
       c: 73,
       d: 20
     }
-    assert_equal shifts, @enigma.shifts("02715", "040895")
-    assert_equal 27, @enigma.shifts("02715", "040895")[:b]
+    assert_equal shifts, @enigma.create_shifts("02715", "040895")
+    assert_equal 27, @enigma.create_shifts("02715", "040895")[:b]
   end
 
   def test_can_prepare_message_for_encryption
