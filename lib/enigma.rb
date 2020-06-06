@@ -8,6 +8,7 @@ class Enigma
 
   def encrypt(message, key = KEY, date = DATE)
     prepare(message)
+    shift = create_shifts(key, date)
     # encryption method
     # returns Hash with encrypted message, key, and date
   end
@@ -24,6 +25,12 @@ class Enigma
   def prepare(message)
     split_chars = message.chars
     split_chars.each_slice(4)
+  end
+
+  def new_char(char, shift)
+    # require "pry"; binding.pry
+    new_index = (ALPHA.index(char) + shift) % ALPHA.count
+    ALPHA[new_index]
   end
 
 end
