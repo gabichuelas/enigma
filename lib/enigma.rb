@@ -50,6 +50,3 @@ class Enigma
   end
 
 end
-
-# enigma = Enigma.new
-# enigma.encrypt("hello world")
