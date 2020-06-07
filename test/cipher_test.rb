@@ -30,7 +30,6 @@ class CipherTest < Minitest::Test
     assert_equal "k", @cipher.new_char("h", 3)
     assert_equal "d", @cipher.new_char("l", 73)
     assert_equal "!", @cipher.new_char("!", 2)
-
   end
 
   def test_can_decrypt_one_char_at_a_time

@@ -11,6 +11,8 @@ class KeyTest < Minitest::Test
   end
 
   def test_returns_5_digit_string
+    assert_equal 5, Key.make.length
+    
     Key.stubs(:rand).returns("01011")
     assert_equal "01011", Key.make
   end
