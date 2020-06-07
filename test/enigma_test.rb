@@ -21,11 +21,16 @@ class EnigmaTest < Minitest::Test
     assert_equal expected, @enigma.encrypt("hello world!", "02715", "040895")
   end
 
-  def test_can_encrypt_using_generated_date
-    @enigma.stubs(:today).returns("060620")
+  def test_can_encrypt_using_only_key
     encrypted = @enigma.encrypt("hello world", "02715")
-    assert_equal "02715", encrypted[:key]
-    assert_equal "060620", encrypted[:date]
+
+    expected = {
+      encryption: encrypted[:encryption],
+      key: "02715",
+      date: Date.today.strftime("%d%m%y")
+    }
+
+    assert_equal expected, encrypted
   end
 
   def test_can_decrypt
@@ -38,7 +43,7 @@ class EnigmaTest < Minitest::Test
     assert_equal expected, @enigma.decrypt("keder ohulw", "02715", "040895")
   end
 
-  def test_can_decrypt_using_generated_date
+  def test_can_decrypt_using_only_key
     encrypted = @enigma.encrypt("hello world", "02715")
 
     decrypted = {
@@ -46,11 +51,11 @@ class EnigmaTest < Minitest::Test
       key: "02715",
       date: Date.today.strftime("%d%m%y")
     }
-    
-    assert_equal decrypted, @enigma.decrypt(encrypted[:encryption], encrypted[:key], encrypted[:date])
+
+    assert_equal decrypted, @enigma.decrypt(encrypted[:encryption], "02715")
   end
 
-  def test_can_encrypt_using_generated_key_date
+  def test_can_encrypt_only_given_message
     encrypted = @enigma.encrypt("hello world")
 
     decrypted = {
@@ -62,6 +67,7 @@ class EnigmaTest < Minitest::Test
     assert_equal decrypted, @enigma.decrypt(encrypted[:encryption], encrypted[:key], encrypted[:date])
 
     refute encrypted[:key].nil?
+    assert_equal 5, encrypted[:key].length
     refute encrypted[:date].nil?
     refute encrypted[:encryption] == "hello world"
   end
