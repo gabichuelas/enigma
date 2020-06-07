@@ -1,10 +1,7 @@
-require 'date'
-require_relative 'key'
+require_relative 'encryptable'
 
 class Cipher
-  KEY = Key.make
-  DATE = Date.today.strftime("%d%m%y")
-  ALPHA = ("a".."z").to_a << " "
+  include Encryptable
 
   def shift_chars(message, key, date)
     shift = create_shifts(key, date)
@@ -35,11 +32,6 @@ class Cipher
     c = key[2..3].to_i + last_four[2].to_i
     d = key[3..4].to_i + last_four[3].to_i
     { a: a, b: b, c: c, d: d }
-  end
-
-  def prepare(message)
-    split_chars = message.chars
-    split_chars.each_slice(4)
   end
 
   def new_char(char, shift)
