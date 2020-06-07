@@ -9,13 +9,13 @@ class CipherTest < Minitest::Test
 
   def test_create_shifts
     shifts = {
-      a: 3,
-      b: 27,
-      c: 73,
-      d: 20
+      "0" => 3,
+      "1" => 27,
+      "2" => 73,
+      "3" => 20
     }
     assert_equal shifts, @cipher.create_shifts("02715", "040895")
-    assert_equal 27, @cipher.create_shifts("02715", "040895")[:b]
+    assert_equal 27, @cipher.create_shifts("02715", "040895")["1"]
   end
 
   def test_can_prepare_message_for_encryption
@@ -26,16 +26,11 @@ class CipherTest < Minitest::Test
     assert_equal true, enum.include?(["r","l","d"])
   end
 
-  def test_can_encrypt_one_char_at_a_time
-    assert_equal "k", @cipher.new_char("h", 3)
-    assert_equal "d", @cipher.new_char("l", 73)
-    assert_equal "!", @cipher.new_char("!", 2)
-  end
-
-  def test_can_decrypt_one_char_at_a_time
-    assert_equal "h", @cipher.original_char("k", 3)
-    assert_equal "l", @cipher.original_char("d", 73)
-    assert_equal "?", @cipher.original_char("?", 73)
+  def test_can_shift_character_by_shift_amount
+    assert_equal "k", @cipher.shift("h", 3)
+    assert_equal "h", @cipher.shift("k", -3)
+    assert_equal "d", @cipher.shift("l", 73)
+    assert_equal "!", @cipher.shift("!", 2)
   end
 
 end
