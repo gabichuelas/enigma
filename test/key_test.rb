@@ -1,4 +1,4 @@
-require "./lib/key"
+require './lib/key'
 
 class KeyTest < Minitest::Test
 
