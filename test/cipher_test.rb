@@ -29,11 +29,14 @@ class CipherTest < Minitest::Test
   def test_can_encrypt_one_char_at_a_time
     assert_equal "k", @cipher.new_char("h", 3)
     assert_equal "d", @cipher.new_char("l", 73)
+    assert_equal "!", @cipher.new_char("!", 2)
+
   end
 
   def test_can_decrypt_one_char_at_a_time
     assert_equal "h", @cipher.og_char("k", 3)
     assert_equal "l", @cipher.og_char("d", 73)
+    assert_equal "?", @cipher.og_char("?", 73)
   end
 
 end
