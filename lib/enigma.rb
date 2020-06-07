@@ -1,7 +1,6 @@
 require_relative 'cipher'
 
 class Enigma < Cipher
-
   def encrypt(message, key = KEY, date = DATE)
     encrypted = shift_chars(message, key, date)
     {
@@ -19,5 +18,4 @@ class Enigma < Cipher
       date: date
     }
   end
-
 end
