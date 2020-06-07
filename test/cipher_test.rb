@@ -1,5 +1,5 @@
-require "./test/test_helper"
-require "./lib/cipher"
+require './test/test_helper'
+require './lib/cipher'
 
 class CipherTest < Minitest::Test
 

@@ -11,7 +11,13 @@ class Enigma < Cipher
     }
   end
 
-  def decrypt()
+  def decrypt(message, key = KEY, date = DATE)
+    decrypted = unshift_chars(message, key, date)
+    {
+      decryption: decrypted.join,
+      key: key,
+      date: date
+    }
   end
 
 end

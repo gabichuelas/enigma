@@ -1,7 +1,8 @@
-require "./test/test_helper"
-require "./lib/enigma"
+require './test/test_helper'
+require './lib/enigma'
 
 class EnigmaTest < Minitest::Test
+
   def setup
     @enigma = Enigma.new
   end
@@ -28,7 +29,6 @@ class EnigmaTest < Minitest::Test
   end
 
   def test_can_decrypt
-    skip
     expected = {
       decryption: "hello world",
       key: "02715",
@@ -39,16 +39,21 @@ class EnigmaTest < Minitest::Test
   end
 
   def test_can_decrypt_using_generated_date
-    skip
-    encrypted = enigma.encrypt("hello world", "02715")
-    decrypted = {
+    @enigma.stubs(:today).returns("060620")
 
+    encrypted = @enigma.encrypt("hello world", "02715")
+    decrypted = {
+      decryption: "hello world",
+      key: "02715",
+      date: "060620"
     }
     assert_equal decrypted, @enigma.decrypt(encrypted[:encryption], "02715")
   end
 
   def test_can_encrypt_using_generated_key_date
-    skip
+    @enigma.stubs(:today).returns("060620")
+    @enigma.stubs(:make).returns("02715")
+
     encrypted = {
 
     }

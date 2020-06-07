@@ -17,6 +17,17 @@ class Cipher
     end
   end
 
+  def unshift_chars(message, key, date)
+    shift = create_shifts(key, date)
+    prepare(message).reduce([]) do |acc, char|
+        acc << og_char(char[0], shift[:a])
+        acc << og_char(char[1], shift[:b]) if char[1]
+        acc << og_char(char[2], shift[:c]) if char[2]
+        acc << og_char(char[3], shift[:d]) if char[3]
+        acc
+    end
+  end
+
   def create_shifts(key, date)
     last_four = (date.to_i ** 2).to_s[-4..-1]
     a = key[0..1].to_i + last_four[0].to_i
@@ -35,6 +46,15 @@ class Cipher
     if ALPHA.include?(char)
       new_index = (ALPHA.index(char) + shift) % ALPHA.count
       ALPHA[new_index]
+    else
+      char
+    end
+  end
+
+  def og_char(char, shift)
+    if ALPHA.include?(char)
+      og_index = (ALPHA.index(char) - shift) % ALPHA.count
+      ALPHA[og_index]
     else
       char
     end
