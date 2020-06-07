@@ -1,4 +1,6 @@
 require_relative 'enigma'
+# $ ruby ./lib/encrypt.rb message.txt encrypted.txt
+# Created 'encrypted.txt' with the key 82648 and date 240818
 
 message_file = File.open(ARGV[0], 'r')
 message = message_file.read
