@@ -33,9 +33,9 @@ class CipherTest < Minitest::Test
   end
 
   def test_can_decrypt_one_char_at_a_time
-    assert_equal "h", @cipher.og_char("k", 3)
-    assert_equal "l", @cipher.og_char("d", 73)
-    assert_equal "?", @cipher.og_char("?", 73)
+    assert_equal "h", @cipher.original_char("k", 3)
+    assert_equal "l", @cipher.original_char("d", 73)
+    assert_equal "?", @cipher.original_char("?", 73)
   end
 
 end
