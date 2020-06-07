@@ -1,10 +1,7 @@
-require 'date'
-require_relative 'key'
+require_relative 'encryptable'
 
 class Cipher
-  KEY = Key.make
-  DATE = Date.today.strftime("%d%m%y")
-  ALPHA = ("a".."z").to_a << " "
+  include Encryptable
 
   def shift_chars(message, key, date)
     shift = create_shifts(key, date)
@@ -20,10 +17,10 @@ class Cipher
   def unshift_chars(message, key, date)
     shift = create_shifts(key, date)
     prepare(message).reduce([]) do |acc, char|
-        acc << og_char(char[0], shift[:a])
-        acc << og_char(char[1], shift[:b]) if char[1]
-        acc << og_char(char[2], shift[:c]) if char[2]
-        acc << og_char(char[3], shift[:d]) if char[3]
+        acc << original_char(char[0], shift[:a])
+        acc << original_char(char[1], shift[:b]) if char[1]
+        acc << original_char(char[2], shift[:c]) if char[2]
+        acc << original_char(char[3], shift[:d]) if char[3]
         acc
     end
   end
@@ -37,11 +34,6 @@ class Cipher
     { a: a, b: b, c: c, d: d }
   end
 
-  def prepare(message)
-    split_chars = message.chars
-    split_chars.each_slice(4)
-  end
-
   def new_char(char, shift)
     if ALPHA.include?(char)
       new_index = (ALPHA.index(char) + shift) % ALPHA.count
@@ -51,10 +43,10 @@ class Cipher
     end
   end
 
-  def og_char(char, shift)
+  def original_char(char, shift)
     if ALPHA.include?(char)
-      og_index = (ALPHA.index(char) - shift) % ALPHA.count
-      ALPHA[og_index]
+      original_index = (ALPHA.index(char) - shift) % ALPHA.count
+      ALPHA[original_index]
     else
       char
     end

@@ -1,3 +1,4 @@
+require './test/test_helper'
 require './lib/key'
 
 class KeyTest < Minitest::Test
@@ -12,7 +13,7 @@ class KeyTest < Minitest::Test
 
   def test_returns_5_digit_string
     assert_equal 5, Key.make.length
-    
+
     Key.stubs(:rand).returns("01011")
     assert_equal "01011", Key.make
   end
