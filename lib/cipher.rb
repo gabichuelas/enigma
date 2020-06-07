@@ -33,5 +33,4 @@ class Cipher
       char
     end
   end
-
 end
