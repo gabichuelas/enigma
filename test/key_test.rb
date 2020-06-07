@@ -16,5 +16,8 @@ class KeyTest < Minitest::Test
 
     Key.stubs(:rand).returns("01011")
     assert_equal "01011", Key.make
+
+    Key.stubs(:rand).returns("721")
+    assert_equal "00721", Key.make
   end
 end
