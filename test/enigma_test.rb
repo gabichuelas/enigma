@@ -39,24 +39,27 @@ class EnigmaTest < Minitest::Test
   end
 
   def test_can_decrypt_using_generated_date
-    @enigma.stubs(:today).returns("060620")
-
     encrypted = @enigma.encrypt("hello world", "02715")
     decrypted = {
       decryption: "hello world",
       key: "02715",
-      date: "060620"
+      date: Date.today.strftime("%d%m%y")
     }
-    assert_equal decrypted, @enigma.decrypt(encrypted[:encryption], "02715")
+    assert_equal decrypted, @enigma.decrypt(encrypted[:encryption], encrypted[:key], encrypted[:date])
   end
 
   def test_can_encrypt_using_generated_key_date
-    @enigma.stubs(:today).returns("060620")
-    @enigma.stubs(:make).returns("02715")
-
-    encrypted = {
-
+    encrypted = @enigma.encrypt("hello world")
+    decrypted = {
+      decryption: "hello world",
+      key: encrypted[:key],
+      date: encrypted[:date]
     }
-    assert_equal encrypted, @enigma.encrypt("hello world")
+
+    assert_equal decrypted, @enigma.decrypt(encrypted[:encryption], encrypted[:key], encrypted[:date])
+
+    refute encrypted[:key].nil?
+    refute encrypted[:date].nil?
+    refute encrypted[:encryption] == "hello world"
   end
 end
