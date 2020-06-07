@@ -71,4 +71,22 @@ class EnigmaTest < Minitest::Test
     refute encrypted[:date].nil?
     refute encrypted[:encryption] == "hello world"
   end
+
+  def test_can_crack_ciphertext
+    encrypted = {
+      encryption: "vjqtbeaweqihssi",
+      key: "08304",
+      date: "291018"
+    }
+
+    assert_equal encrypted, @enigma.encrypt("hello world end", "08304", "291018")
+
+    cracked = {
+      decryption: "hello world end",
+      date: "291018",
+      key: "08304"
+    }
+
+    assert_equal cracked, @enigma.crack("vjqtbeaweqihssi", "291018")
+  end
 end

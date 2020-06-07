@@ -18,4 +18,8 @@ class Enigma < Cipher
       date: date
     }
   end
+
+  def crack(ciphertext, date)
+  end
+  
 end
