@@ -9,13 +9,13 @@ class CipherTest < Minitest::Test
 
   def test_create_shifts
     shifts = {
-      a: 3,
-      b: 27,
-      c: 73,
-      d: 20
+      "0"=>3,
+      "1"=>27,
+      "2"=>73,
+      "3"=>20
     }
     assert_equal shifts, @cipher.create_shifts("02715", "040895")
-    assert_equal 27, @cipher.create_shifts("02715", "040895")[:b]
+    assert_equal 27, @cipher.create_shifts("02715", "040895")["1"]
   end
 
   def test_can_prepare_message_for_encryption
