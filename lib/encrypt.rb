@@ -1,19 +1,16 @@
-require_relative 'enigma'
-# $ cat > message.txt
-# write your message, then CTL + D
-# $ ruby ./lib/encrypt.rb message.txt encrypted.txt
-# Created 'encrypted.txt' with the key 82648 and date 240818
+require_relative 'encrypt_runner'
 
-message_file = File.open(ARGV[0], 'r')
-message = message_file.read
-message_file.close
+runner = EnigmaRunner.new
+required = ARGV[0] && ARGV[1]
 
-encrypted = File.open(ARGV[1], 'w')
-
-enigma = Enigma.new
-encryption = enigma.encrypt(message)
-
-encrypted.write(encryption[:encryption])
-encrypted.close
-
-puts "Created '#{ARGV[1]}' with the key #{encryption[:key]} and date #{encryption[:date]}"
+if required && ARGV[2] && ARGV[3]
+  runner.run_encryption(ARGV[0], ARGV[1], ARGV[2], ARGV[3])
+elsif required && ARGV[2]
+  runner.run_encryption(ARGV[0], ARGV[1], ARGV[2], DATE)
+elsif required && ARGV[3]
+  runner.run_encryption(ARGV[0], ARGV[1], KEY, ARGV[3])
+elsif required
+  runner.run_encryption(ARGV[0], ARGV[1])
+else
+  puts "Wrong number of arguments, try again!"
+end
