@@ -23,5 +23,4 @@ module Encryptable
       shifts
     end
   end
-
 end

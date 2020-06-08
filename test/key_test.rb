@@ -17,9 +17,6 @@ class KeyTest < Minitest::Test
     Key::NUMS.stubs(:sample).returns("01011")
     assert_equal "01011", Key.make
 
-    Key::NUMS.stubs(:sample).returns("00721")
-    assert_equal "00721", Key.make
-
     Key::NUMS.stubs(:sample).returns("00007")
     assert_equal "00007", Key.make
   end
