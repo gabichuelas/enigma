@@ -17,3 +17,10 @@ encrypted.write(encryption[:encryption])
 encrypted.close
 
 puts "Created '#{ARGV[1]}' with the key #{encryption[:key]} and date #{encryption[:date]}"
+
+# write a conditional in case there are not
+# enough ARGV
+# make these a class
+# then put this in a  runner
+encrypt = Encrypt.new
+# (call it something else)

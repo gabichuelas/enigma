@@ -57,28 +57,4 @@ class Cipher
     end
   end
 
-  # def crack_key_string(message, date)
-  #   shift_labels = %w(0 1 2 3).rotate(message.length % 4)
-  #   shifts = []
-  #   shifts << ALPHA.index(message[-4]) - ALPHA.index(" ") + 27
-  #   shifts << ALPHA.index(message[-3]) - ALPHA.index("e") + 27
-  #   shifts << ALPHA.index(message[-2]) - ALPHA.index("n") + 27
-  #   shifts << ALPHA.index(message[-1]) - ALPHA.index("d") + 27
-  #
-  #   shift_hash = shift_labels.zip(shifts).to_h
-  #   date_nums = last_four(date).chars
-  #
-  #   key_nums = []
-  #   date_nums.each_with_index do |num, i|
-  #     key_nums << shift_hash["#{i}"] - num.to_i
-  #   end
-  #   require "pry"; binding.pry
-  #   pair = key_nums[0].to_s.chars
-  #   first = (pair[0].to_i + pair[1].to_i).to_s
-  #   first.prepend("0") until first.length == 2
-  #
-  #
-  # end
-
-
 end

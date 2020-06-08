@@ -20,7 +20,7 @@ class Enigma < Cipher
   end
 
   def crack(ciphertext, date = DATE)
-    # key = crack_key_string(ciphertext, date)
+    # key = method to find key?
     cracked = crack_chars(ciphertext)
     {
       decryption: cracked.join,
