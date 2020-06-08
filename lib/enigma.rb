@@ -19,7 +19,17 @@ class Enigma < Cipher
     }
   end
 
-  def crack(ciphertext, date)
+  def crack(ciphertext, date = DATE)
+    # key = crack_key_string(ciphertext, date)
+    cracked = crack_chars(ciphertext)
+    {
+      decryption: cracked.join,
+      date: date
+      # key: key
+    }
   end
-  
+
 end
+
+# enigma = Enigma.new
+# p enigma.crack("vjqtbeaweqihssi")
