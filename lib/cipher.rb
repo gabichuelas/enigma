@@ -33,4 +33,11 @@ class Cipher
       char
     end
   end
+
+  def crack_key(message, date)
+    Key::NUMS.find do |test_key|
+      decryption = decrypt_chars(message, test_key, date).join
+      decryption[-4..-1] == " end"
+    end
+  end
 end

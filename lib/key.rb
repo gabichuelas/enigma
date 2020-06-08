@@ -1,7 +1,7 @@
 class Key
+  NUMS = ("00000".."99999").to_a
+
   def self.make
-    num = rand(99999).to_s
-    num.prepend("0") until num.length == 5
-    num
+    NUMS.sample
   end
 end

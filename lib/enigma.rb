@@ -18,4 +18,14 @@ class Enigma < Cipher
       date: date
     }
   end
+
+  def crack(ciphertext, date = DATE)
+    key = crack_key(ciphertext, date)
+    decrypted = decrypt_chars(ciphertext, key, date)
+    {
+      decryption: decrypted.join,
+      date: date,
+      key: key
+    }
+  end
 end
