@@ -1,4 +1,4 @@
-require_relative 'encrypt_runner'
+require_relative 'enigma_runner'
 
 runner = EnigmaRunner.new
 required = ARGV[0] && ARGV[1]
