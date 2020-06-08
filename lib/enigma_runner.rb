@@ -10,7 +10,12 @@ class EnigmaRunner < Enigma
     puts "Created '#{output}' with the key #{encryption[:key]} and date #{encryption[:date]}"
   end
 
-  def run_decryption(input, output, key, date)
+  def run_decryption(input, output, key, date = DATE)
+    encryption = open_read_close(input)
+    decryption = decrypt(encryption, key, date)
+    write_to_new_file(output, decryption[:decryption])
+
+    puts "Created '#{output}' with the key #{decryption[:key]} and date #{decryption[:date]}"
   end
 
   def open_read_close(file)

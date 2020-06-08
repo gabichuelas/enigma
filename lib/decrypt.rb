@@ -1,17 +1,13 @@
-require_relative 'enigma'
-# $ ruby ./lib/decrypt.rb encrypted.txt decrypted.txt 82648 240818
-# Created 'decrypted.txt' with the key 82648 and date 240818
+require_relative 'enigma_runner'
 
-encrypted_file = File.open(ARGV[0], 'r')
-encryption = encrypted_file.read
-encrypted_file.close
+runner = EnigmaRunner.new
 
-decrypted = File.open(ARGV[1], 'w')
+required = ARGV[0] && ARGV[1] && ARGV[2]
 
-enigma = Enigma.new
-decryption = enigma.decrypt(encryption, ARGV[2], ARGV[3])
-
-decrypted.write(decryption[:decryption])
-decrypted.close
-
-puts "Created '#{ARGV[1]}' with the key #{ARGV[2]} and date #{ARGV[3]}"
+if required && ARGV[3]
+  runner.run_decryption(ARGV[0], ARGV[1], ARGV[2], ARGV[3])
+elsif required
+  runner.run_decryption(ARGV[0], ARGV[1], ARGV[2])
+else
+  puts "Please include input/output file names, as well as a 5 digit key, and optional date code"
+end

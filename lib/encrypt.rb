@@ -1,5 +1,4 @@
 require_relative 'enigma_runner'
-require_relative 'encryptable'
 
 runner = EnigmaRunner.new
 

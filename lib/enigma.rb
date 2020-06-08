@@ -10,7 +10,7 @@ class Enigma < Cipher
     }
   end
 
-  def decrypt(message, key = KEY, date = DATE)
+  def decrypt(message, key, date = DATE)
     decrypted = decrypt_chars(message, key, date)
     {
       decryption: decrypted.join,
