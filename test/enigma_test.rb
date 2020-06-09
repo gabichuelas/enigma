@@ -80,9 +80,6 @@ class EnigmaTest < Minitest::Test
     }
 
     assert_equal encrypted, @enigma.encrypt("hello world end", "08304", "291018")
-  end
-
-  def test_can_crack_ciphertext
 
     cracked = {
       decryption: "hello world end",
@@ -91,5 +88,9 @@ class EnigmaTest < Minitest::Test
     }
 
     assert_equal cracked, @enigma.crack("vjqtbeaweqihssi", "291018")
+  end
+
+  def test_crack_again
+    assert_equal "testing cipher message! end", @enigma.crack("rusigcgpaypxcg bchsqeu!pccd", "080620")[:decryption]
   end
 end
