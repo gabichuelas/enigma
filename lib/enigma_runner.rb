@@ -18,6 +18,14 @@ class EnigmaRunner < Enigma
     puts "Created '#{output}' with the key #{decryption[:key]} and date #{decryption[:date]}"
   end
 
+  def run_crack(input, output, date = DATE)
+    encryption = open_read_close(input).chomp!
+    cracked = crack(encryption, date)
+    write_to_new_file(output, cracked[:decryption])
+
+    puts "Created '#{output}' with the key #{cracked[:key]} and date #{cracked[:date]}"
+  end
+
   def open_read_close(file)
     message_file = File.open(file, 'r')
     message = message_file.read
