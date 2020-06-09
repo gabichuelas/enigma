@@ -93,4 +93,5 @@ class EnigmaTest < Minitest::Test
   def test_crack_again
     assert_equal "testing cipher message! end", @enigma.crack("rusigcgpaypxcg bchsqeu!pccd", "080620")[:decryption]
   end
+
 end
