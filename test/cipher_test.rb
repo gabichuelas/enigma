@@ -36,4 +36,5 @@ class CipherTest < Minitest::Test
   def test_can_crack_key
     assert_equal "08304", @cipher.crack_key("vjqtbeaweqihssi", "291018")
   end
+
 end
